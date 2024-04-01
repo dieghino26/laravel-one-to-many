@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -15,8 +16,11 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::orderByDesc('updated_at')->orderByDesc('created_at')->get();
-        return view('admin.projects.index', compact('projects'));
+        $types = Type::select('label', 'id')->get();
+
+        return view('admin.projects.index', compact('projects', 'types'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +28,9 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project();
-        return view('admin.projects.create', compact('project'));
+        $types = Type::select('label', 'id')->get();
+
+        return view('admin.projects.create', compact('project', 'types'));
     }
 
     /**
