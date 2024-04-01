@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,10 +19,8 @@ class Type extends Model
     }
 
     //Per ogni Type posso avere più Project
-    public function projects() 
+    public function projects()
     {
         return $this->hasMany(Project::class);
     }
-
 }
-
